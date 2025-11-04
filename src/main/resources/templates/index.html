@@ -11,12 +11,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
 
     <body>
         <header th:replace="~{general/fragmentos :: header}"/>
-        <section>
-            <h2>[[#{aplicacion.titulo}]]</h2> 
-            <img src="../static/img/ImagenPrincipal.png" alt="Su carro merece mas que un lavado"/>
-        </section>
+        <div class="text-center">
+            <img src="../static/img/ImagenPrincipal.png" class="rounded" alt="Mas que un lavado"/>
+        </div>
         <aside>
-            <img src="../static/img/No salgas de casa.png" alt="No salgas de Casa"/>
+            <img src="../static/img/No salgas de casa.png" alt=""/>
         </aside>
         <footer th:replace="~{general/fragmentos :: footer}"/>
 
