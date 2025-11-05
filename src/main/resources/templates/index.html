@@ -7,17 +7,94 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns:th="http://www.thymeleaf.org"      
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-    <head th:replace="~{general/fragmentos :: head}"/>
+    <head th:replace="~{fragments/head :: head}"></head>
 
     <body>
-        <header th:replace="~{general/fragmentos :: header}"/>
-        <div class="text-center">
-            <img src="../static/img/ImagenPrincipal.png" class="rounded" alt="Mas que un lavado"/>
-        </div>
-        <aside>
-            <img src="../static/img/No salgas de casa.png" alt=""/>
-        </aside>
-        <footer th:replace="~{general/fragmentos :: footer}"/>
+        <header th:replace="~{fragments/header :: header}"></header>
 
+        <div class="container mt-5">
+
+            <h1 class="text-center mb-4">Platinum Car Detailers</h1>
+            <p class="text-center mb-5">Seleccione una opción para continuar</p>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+
+                <!-- Agendar Cita -->
+                <div class="col">
+                    <a href="/agendar_cita" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Agendar Cita</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Enviar Imágenes para Cotización -->
+                <div class="col">
+                    <a href="/cotizacion" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Enviar Imágenes para Cotización</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Membresías -->
+                <div class="col">
+                    <a href="/membresia" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Membresías</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Galería -->
+                <div class="col">
+                    <a href="/galeria" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Galería de Trabajos</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Testimonios -->
+                <div class="col">
+                    <a href="/testimonios" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Testimonios</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Promociones -->
+                <div class="col">
+                    <a href="/promociones" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Promociones Activas</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Contacto WhatsApp -->
+                <div class="col">
+                    <a href="/contacto" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4">
+                            <h4>Contacto Directo</h4>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Administración de Usuarios -->
+                <div class="col">
+                    <a href="/usuario/listado" class="text-decoration-none">
+                        <div class="card h-100 shadow-sm text-center p-4 bg-dark text-white">
+                            <h4>Administrar Usuarios</h4>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <footer th:replace="~{fragments/footer :: footer}"></footer>
     </body>
+
 </html>
