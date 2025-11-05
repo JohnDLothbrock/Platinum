@@ -7,11 +7,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
       xmlns:th="http://www.thymeleaf.org"      
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-    <head th:replace="fragments/plantilla :: head"></head>
+    <head th:replace="templates.general/fragmentos :: head"></head>
 
 
     <body>
-        <header th:replace="fragments/plantilla :: header"></header>
+        <header th:replace="templates.general/fragmentos :: header"></header>
 
         <div class="container mt-5">
 
@@ -95,7 +95,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
             </div>
         </div>
 
-        <footer th:replace="fragments/plantilla :: footer"></footer>
+        <footer th:replace="templates.general/fragmentos :: footer"></footer>
     </body>
 
 </html>
