@@ -18,10 +18,11 @@ public class UsuarioService {
     private UsuarioRepository usuarioRepository;
 
     @Transactional(readOnly = true)
-    public List<Usuarios> getUsuarios(boolean activos) {
+    public List<Usuario> getUsuarios(boolean activos) {
         var lista = usuarioRepository.findAll();
-        if (activo) {
-            lista.removeIf(e -> !e.isActivo());
+        if (activos) {
+            lista.removeIf(e -> !e.getActivo());
         }
+        return lista;
     }
 }
