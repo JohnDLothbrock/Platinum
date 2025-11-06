@@ -4,25 +4,16 @@
  */
 package com.platinum.controller;
 
-import com.platinum.service.PromocionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/promocion")
 public class PromocionController {
 
-    @Autowired
-    private PromocionService promocionService;
-
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var promociones = promocionService.getPromociones(false);
-        model.addAttribute("promociones", promociones);
-        model.addAttribute("totalPromociones", promociones.size());
-        return "promocion/listado";
+    @GetMapping("/promociones")
+    public String promociones(Model model) {
+        // Aquí cargar una lista de promociones desde la BD mas adelante
+        return "promociones"; 
     }
 }

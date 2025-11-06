@@ -12,17 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/membresia")
 public class MembresiaController {
 
     @Autowired
     private MembresiaService membresiaService;
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
+    @GetMapping("/membresia")
+    public String membresia(Model model) {
         var membresias = membresiaService.getMembresias();
         model.addAttribute("membresias", membresias);
         model.addAttribute("totalMembresias", membresias.size());
-        return "membresia/listado";
+        return "membresia"; 
     }
 }

@@ -20,11 +20,11 @@ public class UsuarioController {
 
     @GetMapping("/listado")
     public String inicio(Model model) {
-
         var usuarios = usuarioService.getUsuarios(false);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("totalUsuarios", usuarios.size());
-        return "usuario/listado";
-    }
 
+        // ✅ Cambiado: ahora devuelve "usuario" (no "usuario/listado")
+        return "usuario";
+    }
 }

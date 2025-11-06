@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+    <head th:replace="general/fragmentos :: head"></head>
+
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Administración de Usuarios</h2>
+
+            <div class="card shadow-sm p-4">
+                <div th:if="${usuarios != null and !usuarios.isEmpty()}">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Correo</th>
+                                <th>Activo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="usuario : ${usuarios}">
+                                <td th:text="${usuario.idUsuario}"></td>
+                                <td th:text="${usuario.nombre}"></td>
+                                <td th:text="${usuario.correo}"></td>
+                                <td>
+                                    <span th:text="${usuario.activo ? 'Sí' : 'No'}"
+                                          th:classappend="${usuario.activo} ? 'text-success' : 'text-danger'"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div th:if="${usuarios == null or usuarios.isEmpty()}" class="text-center text-muted">
+                    <p>No hay usuarios registrados aún.</p>
+                </div>
+            </div>
+
+            <div class="text-end mt-3">
+                <p class="text-muted">Total de usuarios:
+                    <span th:text="${totalUsuarios}"></span>
+                </p>
+            </div>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>

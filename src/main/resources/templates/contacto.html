@@ -3,13 +3,52 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="general/fragmentos :: head"></head>
+
     <body>
-        <div>TODO write content</div>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Contáctanos</h2>
+            <p class="text-center text-muted mb-5">
+                ¿Tienes dudas o quieres una atención personalizada? Escríbenos.
+            </p>
+
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card shadow-sm p-4">
+                        <form th:action="@{/contacto/enviar}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="text" class="form-control" name="telefono">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Mensaje</label>
+                                <textarea class="form-control" name="mensaje" rows="4" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Canal de contacto</label>
+                                <select class="form-select" name="canal">
+                                    <option value="WhatsApp">WhatsApp</option>
+                                    <option value="Correo">Correo</option>
+                                </select>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
 </html>

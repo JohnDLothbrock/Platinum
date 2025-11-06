@@ -3,13 +3,36 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="general/fragmentos :: head"></head>
+
     <body>
-        <div>TODO write content</div>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Testimonios de Nuestros Clientes</h2>
+            <p class="text-center text-muted mb-5">
+                Conoce la experiencia de quienes ya confían en Platinum Car Detailers.
+            </p>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col" th:each="testimonio : ${testimonios}">
+                    <div class="card h-100 shadow-sm p-4">
+                        <h5 th:text="${testimonio.usuario.nombre}">Nombre del Cliente</h5>
+                        <p class="mt-2" th:text="${testimonio.comentario}">Comentario del cliente...</p>
+                        <div class="text-warning">
+                            <i class="fa fa-star" th:each="i : ${#numbers.sequence(1, testimonio.calificacion)}"></i>
+                        </div>
+                        <small class="text-muted" th:text="${#dates.format(testimonio.fechaCreacion, 'dd/MM/yyyy')}">
+                            Fecha del testimonio
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
 </html>

@@ -3,13 +3,34 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="general/fragmentos :: head"></head>
+
     <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Galería de Trabajos</h2>
+            <p class="text-center text-muted mb-5">
+                Antes y después de algunos de nuestros servicios de detallado profesional.
+            </p>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" th:each="imagen : ${galeria}">
+                    <div class="card shadow-sm h-100">
+                        <img th:src="@{${imagen.rutaImagenAntes}}" class="card-img-top" alt="Antes del servicio">
+                            <div class="card-body text-center">
+                                <h5 th:text="${imagen.titulo}">Título del trabajo</h5>
+                                <p class="text-muted" th:text="${imagen.descripcion}">Descripción breve...</p>
+                            </div>
+                            <img th:src="@{${imagen.rutaImagenDespues}}" class="card-img-bottom" alt="Después del servicio">
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+
+                                <footer th:replace="general/fragmentos :: footer"></footer>
+                                </body>
+                                </html>

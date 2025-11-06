@@ -4,25 +4,16 @@
  */
 package com.platinum.controller;
 
-import com.platinum.service.GaleriaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/galeria")
 public class GaleriaController {
 
-    @Autowired
-    private GaleriaService galeriaService;
-
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var galerias = galeriaService.getGalerias(false);
-        model.addAttribute("galerias", galerias);
-        model.addAttribute("totalGalerias", galerias.size());
-        return "galeria/listado";
+    @GetMapping("/galeria")
+    public String galeria(Model model) {
+        //aqui se puede agregar imagenes desde la BD mas adelante
+        return "galeria"; 
     }
 }
