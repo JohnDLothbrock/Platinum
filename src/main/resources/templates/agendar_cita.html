@@ -3,13 +3,35 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="general/fragmentos :: head"></head>
+
     <body>
-        <div>TODO write content</div>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-5">
+            <h1 class="text-center mb-4">Agendar una Cita</h1>
+            <p class="text-center">Complete el siguiente formulario para agendar su cita de detailing.</p>
+
+            <form class="mt-4">
+                <div class="mb-3">
+                    <label class="form-label">Nombre completo</label>
+                    <input type="text" class="form-control" placeholder="Ingrese su nombre completo"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" placeholder="Número de contacto"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Fecha deseada</label>
+                    <input type="date" class="form-control"/>
+                </div>
+                <button type="submit" class="btn btn-dark w-100">Enviar Solicitud</button>
+            </form>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
 </html>
