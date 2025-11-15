@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Date;
 import lombok.Data;
 
 @Data
@@ -23,17 +21,17 @@ public class Promocion implements Serializable {
     @Column(nullable = false, length = 100)
     private String titulo;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, length = 255)
     private String descripcion;
 
-    @Column(name = "descuento_porcentaje", precision = 5, scale = 2)
-    private java.math.BigDecimal descuentoPorcentaje;
+    @Column(name = "porcentaje_descuento", precision = 5, scale = 2)
+    private BigDecimal porcentajeDescuento;
 
-    @Column(name = "fecha_inicio")
-    private java.sql.Date fechaInicio;
+    @Column(name = "fecha_inicio", nullable = false)
+    private Date fechaInicio;
 
-    @Column(name = "fecha_fin")
-    private java.sql.Date fechaFin;
+    @Column(name = "fecha_fin", nullable = false)
+    private Date fechaFin;
 
     @Column(length = 1024)
     private String imagen;
@@ -47,3 +45,4 @@ public class Promocion implements Serializable {
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
     private java.sql.Timestamp fechaModificacion;
 }
+

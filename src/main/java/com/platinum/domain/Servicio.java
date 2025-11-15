@@ -2,6 +2,7 @@ package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
@@ -16,10 +17,10 @@ public class Servicio implements Serializable {
     @Column(name = "id_servicio")
     private Integer idServicio;
 
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, length = 255)
     private String descripcion;
 
     @Enumerated(EnumType.STRING)
@@ -27,17 +28,14 @@ public class Servicio implements Serializable {
     private TipoVehiculo tipoVehiculo;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @Column(name = "paquete", nullable = false, length = 20)
     private Paquete paquete;
 
-    @Column(nullable = false)
-    private Double precio;
+    @Column(name = "duracion_minutos", nullable = false)
+    private Integer duracionMinutos;
 
-    @Column(name = "duracion_estimada")
-    private Integer duracionEstimada;
-
-    @Column(name = "ruta_imagen", length = 1024)
-    private String rutaImagen;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
 
     @Column(nullable = false)
     private Boolean activo = true;
@@ -49,10 +47,11 @@ public class Servicio implements Serializable {
     private java.sql.Timestamp fechaModificacion;
 
     public enum TipoVehiculo {
-        Sedán, SUV, Pickup, Motocicleta
+        Sedan, SUV, Pickup, Motocicleta
     }
 
     public enum Paquete {
-        Básico, Premium, VIP
+        Basico, Premium, VIP
     }
 }
+

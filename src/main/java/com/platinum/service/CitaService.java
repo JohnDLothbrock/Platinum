@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.platinum.service;
 
 import com.platinum.domain.Cita;
@@ -20,5 +16,20 @@ public class CitaService {
     @Transactional(readOnly = true)
     public List<Cita> getCitas() {
         return citaRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Cita getCita(Cita cita) {
+        return citaRepository.findById(cita.getIdCita()).orElse(null);
+    }
+
+    @Transactional
+    public void save(Cita cita) {
+        citaRepository.save(cita);
+    }
+
+    @Transactional
+    public void delete(Cita cita) {
+        citaRepository.delete(cita);
     }
 }

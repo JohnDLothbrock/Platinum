@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
 import lombok.Data;
 
 @Data
@@ -20,19 +18,29 @@ public class Cita implements Serializable {
     @Column(name = "id_cita")
     private Integer idCita;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @Column(name = "nombre_cliente", nullable = false, length = 100)
+    private String nombreCliente;
 
-    @ManyToOne
-    @JoinColumn(name = "id_servicio", nullable = false)
-    private Servicio servicio;
+    @Column(nullable = false, length = 20)
+    private String telefono;
+
+    @Column(length = 100)
+    private String correo;
+
+    @Column(name = "tipo_vehiculo", nullable = false, length = 30)
+    private String tipoVehiculo;
+
+    @Column(length = 10)
+    private String placa;
+
+    @Column(name = "servicio_solicitado", nullable = false, length = 100)
+    private String servicioSolicitado;
 
     @Column(name = "fecha_cita", nullable = false)
-    private java.sql.Date fechaCita;
+    private Date fechaCita;
 
     @Column(name = "hora_cita", nullable = false)
-    private java.sql.Time horaCita;
+    private Time horaCita;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
@@ -51,3 +59,4 @@ public class Cita implements Serializable {
         Pendiente, Confirmada, Rechazada, Cancelada, Completada
     }
 }
+

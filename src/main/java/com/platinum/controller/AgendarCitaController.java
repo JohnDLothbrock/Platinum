@@ -1,9 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 package com.platinum.controller;
 
+import com.platinum.domain.Cita;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -11,7 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AgendarCitaController {
 
     @GetMapping("/agendar_cita")
-    public String agendarCita() {
+    public String agendarCita(Cita cita) {
         return "agendar_cita";
     }
 }
+

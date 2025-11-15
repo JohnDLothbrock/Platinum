@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h1 class="mb-3">Servicios</h1>
+
+            <a class="btn btn-primary mb-3" th:href="@{/servicio/nuevo}">
+                Agregar servicio
+            </a>
+
+            <p>Total de servicios: <span th:text="${totalServicios}">0</span></p>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tipo Vehículo</th>
+                        <th>Paquete</th>
+                        <th>Duración (min)</th>
+                        <th>Precio</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="servicio : ${servicios}">
+                        <td th:text="${servicio.idServicio}">1</td>
+                        <td th:text="${servicio.nombre}">Lavado Premium</td>
+                        <td th:text="${servicio.tipoVehiculo}">SUV</td>
+                        <td th:text="${servicio.paquete}">Basico</td>
+                        <td th:text="${servicio.duracionMinutos}">60</td>
+                        <td th:text="${servicio.precio}">25000</td>
+                        <td th:text="${servicio.activo}">true</td>
+                        <td>
+                            <a class="btn btn-sm btn-warning"
+                               th:href="@{/servicio/modificar/{idServicio}(idServicio=${servicio.idServicio})}">
+                                Editar
+                            </a>
+                            <a class="btn btn-sm btn-danger"
+                               th:href="@{/servicio/eliminar/{idServicio}(idServicio=${servicio.idServicio})}">
+                                Eliminar
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>

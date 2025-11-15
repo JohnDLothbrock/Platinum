@@ -1,11 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Date;
 import lombok.Data;
 
 @Data
@@ -20,26 +18,31 @@ public class Membresia implements Serializable {
     @Column(name = "id_membresia")
     private Integer idMembresia;
 
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
+    @Column(name = "nombre_cliente", nullable = false, length = 100)
+    private String nombreCliente;
+
+    @Column(nullable = false, length = 100)
+    private String correo;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private Tipo tipo;
 
     @Column(name = "fecha_inicio", nullable = false)
-    private java.sql.Date fechaInicio;
+    private Date fechaInicio;
 
     @Column(name = "fecha_fin", nullable = false)
-    private java.sql.Date fechaFin;
-
-    @Column(columnDefinition = "TEXT")
-    private String beneficios;
+    private Date fechaFin;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private Estado estado = Estado.Activa;
+
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
+
+    @Column(nullable = false)
+    private Boolean activo = true;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private java.sql.Timestamp fechaCreacion;
