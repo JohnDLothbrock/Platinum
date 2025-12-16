@@ -1,25 +1,17 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
     <head th:replace="general/fragmentos :: head"></head>
-
-    <body>
+    <body style="background: url('https://png.pngtree.com/thumb_back/fh260/background/20231227/pngtree-high-resolution-background-featuring-silver-metal-brushed-aluminum-texture-for-design-image_13850077.png') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
         <header th:replace="general/fragmentos :: header"></header>
-
         <div class="container mt-5">
-            <h2 class="text-center mb-4">Promociones Activas</h2>
+            <h2 class="text-center mb-4 text-dark">Promociones Activas</h2>
             <p class="text-center text-muted mb-5">
                 Aprovecha nuestras ofertas limitadas y mantén tu auto impecable.
             </p>
-
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col" th:each="promo : ${promociones}">
-                    <div class="card h-100 shadow-sm">
+                    <div class="card h-100 shadow-sm bg-light">
                         <img th:src="@{${promo.imagen}}" class="card-img-top" alt="Imagen promoción">
                             <div class="card-body text-center">
                                 <h5 th:text="${promo.titulo}">Título de la promoción</h5>
@@ -33,7 +25,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
             </div>
         </div>
-
         <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
 </html>

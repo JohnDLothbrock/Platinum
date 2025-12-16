@@ -1,24 +1,17 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html xmlns="http://www.w3.org/1999/xhtml" 
-      xmlns:th="http://www.thymeleaf.org"      
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
     <head th:replace="general/fragmentos :: head"></head>
 
-    <body>
+    <body style="background: url('https://img.freepik.com/free-vector/silver-metal-background-1_78370-324.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
         <header th:replace="general/fragmentos :: header"></header>
-
         <div class="container mt-5">
-
-            <h1 class="text-center mb-4">Platinum Car Detailers</h1>
-            <p class="text-center mb-5">Seleccione una opción para continuar</p>
-
+            <h1 class="text-center mb-4 text-dark">Platinum Car Detailers</h1>
+            <p class="text-center mb-5 text-dark">Seleccione una opción para continuar</p>
             <div class="row row-cols-1 row-cols-md-2 g-4">
-
                 <!-- Agendar Cita -->
                 <div class="col">
                     <a href="/agendar_cita" class="text-decoration-none">
@@ -85,8 +78,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </div>
             </div>
         </div>
-
         <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
-
 </html>

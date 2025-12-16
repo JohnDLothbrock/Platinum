@@ -1,24 +1,15 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
     <head th:replace="general/fragmentos :: head"></head>
-
-    <body>
+    <body style="background: url('https://png.pngtree.com/thumb_back/fh260/background/20231227/pngtree-high-resolution-background-featuring-silver-metal-brushed-aluminum-texture-for-design-image_13850077.png') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
         <header th:replace="general/fragmentos :: header"></header>
-
         <div class="container mt-5">
-            <h1 class="text-center mb-4">Membresías Activas</h1>
-            <p class="text-center mb-4">Total de membresías: <strong th:text="${totalMembresias}"></strong></p>
-
+            <h1 class="text-center mb-4 text-dark">Membresías Activas</h1>
+            <p class="text-center mb-4 text-dark">Total de membresías: <strong th:text="${totalMembresias}"></strong></p>
             <div th:if="${membresias.isEmpty()}" class="alert alert-info text-center">
                 No hay membresías registradas aún.
             </div>
-
             <div class="row row-cols-1 row-cols-md-3 g-4" th:unless="${membresias.isEmpty()}">
                 <div class="col" th:each="m : ${membresias}">
                     <div class="card h-100 text-bg-warning shadow-sm">
@@ -39,7 +30,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                                                     </div>
                                                     </div>
                                                     </div>
-
                                                     <footer th:replace="general/fragmentos :: footer"></footer>
-                                                </body>
-</html>
+                                                    </body>
+                                                    </html>
