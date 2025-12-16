@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 import lombok.Data;
 
@@ -26,25 +27,30 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-
     private Integer idUsuario;
 
     @Column(unique = true, nullable = false, length = 30)
+    @NotBlank (message = "Usuario no puede estar vacio.")
     private String username;
     
-     @Column(nullable = false, length = 512)
+    @Column(nullable = false, length = 512)
+    @NotBlank (message = "La Contraseña No puede estar Vacia.")
     private String password;
 
     @Column(nullable = false, length = 50)
+    @NotBlank (message = "No podemos proceder sin un Nombre.")
     private String nombre;
 
     @Column(length = 50)
+    @NotBlank (message = "Los Apellidos No pueden estar Vacios.")
     private String apellidos;
 
     @Column(length = 75, unique = true)
+    @NotBlank (message = "Necesitamos que ingreses un correo.")
     private String correo;
 
     @Column(length = 25)
+    @NotBlank (message = "Por favor ingresar un numero de Telefono.")
     private String telefono;
 
     @Column(name = "ruta_imagen", length = 1024)
