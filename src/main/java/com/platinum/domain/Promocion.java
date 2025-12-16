@@ -1,6 +1,7 @@
 package com.platinum.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -22,6 +23,7 @@ public class Promocion implements Serializable {
     private String titulo;
 
     @Column(nullable = false, length = 255)
+    @NotBlank (message = "La descripcion No puede estar Vacia.")
     private String descripcion;
 
     @Column(name = "porcentaje_descuento", precision = 5, scale = 2)
