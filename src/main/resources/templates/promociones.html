@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body style="background: url('https://png.pngtree.com/thumb_back/fh260/background/20231227/pngtree-high-resolution-background-featuring-silver-metal-brushed-aluminum-texture-for-design-image_13850077.png') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+        <header th:replace="general/fragmentos :: header"></header>
+        <div class="container mt-5">
+            <h2 class="text-center mb-4 text-dark">Promociones Activas</h2>
+            <p class="text-center text-muted mb-5">
+                Aprovecha nuestras ofertas limitadas y mantén tu auto impecable.
+            </p>
+
+            <div th:if="${promociones.isEmpty()}" class="alert alert-info text-center py-5">
+                <h4>No hay promociones activas en este momento.</h4>
+                <p>¡Vuelve pronto para ver nuevas ofertas!</p>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 g-4" th:unless="${promociones.isEmpty()}">
+                <div class="col" th:each="promo : ${promociones}">
+                    <div class="card h-100 shadow-sm bg-light overflow-hidden">
+                        <img th:if="${promo.imagen != null and !promo.imagen.isEmpty()}"
+                             th:src="@{${promo.imagen}}"
+                             class="card-img-top"
+                             style="height: 250px; object-fit: cover;"
+                             alt="Imagen de la promoción">
+                            <div th:if="${promo.imagen == null or promo.imagen.isEmpty()}"
+                                 class="bg-secondary text-white d-flex align-items-center justify-content-center"
+                                 style="height: 250px;">
+                                <h3>Sin imagen</h3>
+                            </div>
+                            <div class="card-body text-center d-flex flex-column">
+                                <h4 class="card-title text-dark" th:text="${promo.titulo}">Título Promoción</h4>
+                                <p class="card-text text-muted flex-grow-1" th:text="${promo.descripcion}">
+                                    Descripción de la promoción...
+                                </p>
+                                <div class="mt-3" th:if="${promo.porcentajeDescuento != null}">
+                                    <span class="badge bg-success fs-5 px-4 py-2">
+                                        <i class="fas fa-tag"></i> 
+                                        <span th:text="${promo.porcentajeDescuento} + '%'">%</span> OFF
+                                    </span>
+                                </div>
+                                <small class="text-muted mt-3">
+                                    Vigente del 
+                                    <span th:text="${#dates.format(promo.fechaInicio, 'dd/MM/yyyy')}"></span> 
+                                    al 
+                                    <span th:text="${#dates.format(promo.fechaFin, 'dd/MM/yyyy')}"></span>
+                                </small>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>

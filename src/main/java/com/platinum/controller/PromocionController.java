@@ -20,93 +20,82 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/promocion")
+@RequestMapping("/")
 public class PromocionController {
 
     @Autowired
-    private PromocionService promocionService;   // CRUD
+    private PromocionService promocionService;
 
     @Autowired
-    private FirebaseStorageService firebaseStorageService;   // Guardar Imágenes
+    private FirebaseStorageService firebaseStorageService;
 
     @Autowired
-    private MessageSource messageSource;   // Mensajes personalizados
+    private MessageSource messageSource;
 
-    // Listado de promociones
-    @GetMapping("/listado")   // localhost:8080/promocion/listado
-    public String inicio(Model model) {
-        var promociones = promocionService.getPromociones(false);   // todas
+    // Vista pública de promociones (para clientes)
+    @GetMapping("/promociones")
+    public String promocionesPublicas(Model model) {
+        var promociones = promocionService.getPromociones(true); // solo activas
         model.addAttribute("promociones", promociones);
-        model.addAttribute("totalPromociones", promociones.size());
-        return "/promocion/listado";   // tu vista listado.html
+        return "promociones";
     }
 
-    // Modificar (viene de botón editar)
-    @PostMapping("/modificar")
+    // Administración: listado completo
+    @GetMapping("/promocion/listado")
+    public String listadoAdmin(Model model) {
+        var promociones = promocionService.getPromociones(false); // todas
+        model.addAttribute("promociones", promociones);
+        model.addAttribute("totalPromociones", promociones.size());
+        return "promocion/listado";
+    }
+
+    // Nuevo promoción (para admin)
+    @GetMapping("/promocion/nuevo")
+    public String promocionNueva(Model model) {
+        model.addAttribute("promocion", new Promocion()); // objeto vacío
+        return "promocion/modifica";
+    }
+
+    // Modificar (viene del botón editar)
+    @PostMapping("/promocion/modificar")
     public String modificar(Promocion promocion, Model model) {
         promocion = promocionService.getPromocion(promocion);
         model.addAttribute("promocion", promocion);
-        return "/promocion/modifica";   // tu vista modifica.html
+        return "promocion/modifica";
     }
 
-    // Guardar (nuevo o modificar)
-    @PostMapping("/guardar")
+    // Guardar (nuevo o editar)
+    @PostMapping("/promocion/guardar")
     public String guardar(Promocion promocion,
             @RequestParam MultipartFile imagenFile,
             RedirectAttributes redirectAttributes) {
-
-        if (!imagenFile.isEmpty()) {   // Si subieron imagen...
-            promocionService.save(promocion);   // guardo primero para tener id
+        if (!imagenFile.isEmpty()) {
+            promocionService.save(promocion); // guardar primero para tener ID
             String rutaImagen = firebaseStorageService
-                    .cargaImagen(
-                            imagenFile,
-                            "promocion",
-                            promocion.getIdPromocion());
+                    .cargaImagen(imagenFile, "promocion", promocion.getIdPromocion());
             promocion.setImagen(rutaImagen);
         }
         promocionService.save(promocion);
 
         redirectAttributes.addFlashAttribute("todoOk",
-                messageSource.getMessage("mensaje.actualizado",
-                        null,
-                        Locale.getDefault()));
+                messageSource.getMessage("mensaje.actualizado", null, Locale.getDefault()));
         return "redirect:/promocion/listado";
     }
 
     // Eliminar
-    @PostMapping("/eliminar")
+    @PostMapping("/promocion/eliminar")
     public String eliminar(Promocion promocion, RedirectAttributes redirectAttributes) {
         promocion = promocionService.getPromocion(promocion);
-
-        if (promocion == null) {   // No existe
+        if (promocion == null) {
             redirectAttributes.addFlashAttribute("error",
-                    messageSource.getMessage("promocion.error01",
-                            null,
-                            Locale.getDefault()));
-        } else if (false) {   // aquí pondrás la regla futura (ej: si tiene citas asociadas)
-            redirectAttributes.addFlashAttribute("error",
-                    messageSource.getMessage("promocion.error02",
-                            null,
-                            Locale.getDefault()));
+                    messageSource.getMessage("promocion.error01", null, Locale.getDefault()));
         } else if (promocionService.delete(promocion)) {
-            // Se borró
             redirectAttributes.addFlashAttribute("todoOk",
-                    messageSource.getMessage("mensaje.eliminado",
-                            null,
-                            Locale.getDefault()));
+                    messageSource.getMessage("mensaje.eliminado", null, Locale.getDefault()));
         } else {
             redirectAttributes.addFlashAttribute("error",
-                    messageSource.getMessage("promocion.error03",
-                            null,
-                            Locale.getDefault()));
+                    messageSource.getMessage("promocion.error03", null, Locale.getDefault()));
         }
         return "redirect:/promocion/listado";
-    }
-
-    // Nuevo (viene de botón “Agregar nueva promoción”)
-    @GetMapping("/nuevo")
-    public String promocionNueva(Promocion promocion, Model model) {
-        model.addAttribute("promocion", promocion);   // objeto vacío
-        return "/promocion/modifica";
     }
 }
