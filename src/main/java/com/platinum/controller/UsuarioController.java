@@ -23,8 +23,6 @@ public class UsuarioController {
         var usuarios = usuarioService.getUsuarios(false);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("totalUsuarios", usuarios.size());
-
-        // ✅ Cambiado: ahora devuelve "usuario" (no "usuario/listado")
-        return "usuario";
+        return "usuario/usuario";  // ← Cambiado aquí
     }
 }

@@ -1,22 +1,17 @@
-
 -- 🚗 BASE DE DATOS: Platinum Car Detailers
--- Versión inicial: 2025-12-15
+-- Versión: 2025-12-15
 -- Autores: Juan Ureña y Leonardo Ortiz
 -- ================================================================
--- 1. Crear la base de datos 
+
 DROP DATABASE IF EXISTS platinum;
 CREATE DATABASE platinum DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE platinum;
-  
-
 
 -- 3. Usuarios y permisos
 CREATE USER IF NOT EXISTS 'platinum_user'@'%' IDENTIFIED BY 'Platinum_123.';
 CREATE USER IF NOT EXISTS 'platinum_report'@'%' IDENTIFIED BY 'Platinum_Report.';
-
 GRANT SELECT, INSERT, UPDATE, DELETE ON platinum.* TO 'platinum_user'@'%';
 GRANT SELECT ON platinum.* TO 'platinum_report'@'%';
-
 FLUSH PRIVILEGES;
 
 -- 4.1 CLIENTE
@@ -156,14 +151,19 @@ CREATE TABLE rol (
   PRIMARY KEY (id_rol)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
--- 5.2 USUARIO
+-- 5.2 USUARIO (MODIFICADA PARA COINCIDIR CON LA ENTIDAD Usuario.java)
 CREATE TABLE usuario (
   id_usuario INT NOT NULL AUTO_INCREMENT,
-  nombre VARCHAR(100) NOT NULL,
   username VARCHAR(50) NOT NULL UNIQUE,
   password VARCHAR(255) NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  apellidos VARCHAR(50),
+  correo VARCHAR(75) UNIQUE,
+  telefono VARCHAR(25),
+  ruta_imagen VARCHAR(1024),
   activo TINYINT(1) NOT NULL DEFAULT 1,
   fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id_usuario)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
