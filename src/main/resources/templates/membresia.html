@@ -12,39 +12,34 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header th:replace="general/fragmentos :: header"></header>
 
         <div class="container mt-5">
-            <h2 class="text-center mb-4">Planes de Membresía</h2>
-            <p class="text-center text-muted mb-5">Disfruta de beneficios exclusivos al ser miembro Platinum.</p>
+            <h1 class="text-center mb-4">Membresías Activas</h1>
+            <p class="text-center mb-4">Total de membresías: <strong th:text="${totalMembresias}"></strong></p>
 
-            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card border-primary h-100 text-center p-4">
-                        <h4 class="text-primary">Mensual</h4>
-                        <p class="mt-3">Limpieza completa, encerado básico y descuentos en servicios.</p>
-                        <h5 class="mt-auto">$49.99 / mes</h5>
-                        <a href="#" class="btn btn-primary mt-3">Suscribirse</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card border-warning h-100 text-center p-4">
-                        <h4 class="text-warning">Anual</h4>
-                        <p class="mt-3">Beneficios extendidos, lavado VIP y prioridad en citas.</p>
-                        <h5 class="mt-auto">$499.99 / año</h5>
-                        <a href="#" class="btn btn-warning mt-3">Suscribirse</a>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card border-success h-100 text-center p-4">
-                        <h4 class="text-success">Elite</h4>
-                        <p class="mt-3">Incluye todos los servicios Premium y eventos exclusivos.</p>
-                        <h5 class="mt-auto">$899.99 / año</h5>
-                        <a href="#" class="btn btn-success mt-3">Unirme</a>
-                    </div>
-                </div>
+            <div th:if="${membresias.isEmpty()}" class="alert alert-info text-center">
+                No hay membresías registradas aún.
             </div>
-        </div>
 
-        <footer th:replace="general/fragmentos :: footer"></footer>
-    </body>
+            <div class="row row-cols-1 row-cols-md-3 g-4" th:unless="${membresias.isEmpty()}">
+                <div class="col" th:each="m : ${membresias}">
+                    <div class="card h-100 text-bg-warning shadow-sm">
+                        <div class="card-body text-center">
+                            <h5 class="card-title" th:text="${m.nombreCliente}"></h5>
+                            <p class="card-text">
+                                <strong>Tipo:</strong> <span th:text="${m.tipo}"></span><br>
+                                    <strong>Estado:</strong> <span th:text="${m.estado}"></span><br>
+                                        <strong>Precio:</strong> ₡<span th:text="${#numbers.formatDecimal(m.precio, 0, 2, 'COMMA')}"></span><br>
+                                            <strong>Inicio:</strong> <span th:text="${#temporals.format(m.fechaInicio, 'dd/MM/yyyy')}"></span><br>
+                                                <strong>Fin:</strong> <span th:text="${#temporals.format(m.fechaFin, 'dd/MM/yyyy')}"></span><br>
+                                                    <strong>Correo:</strong> <span th:text="${m.correo}"></span>
+                                                    </p>
+                                                    <small class="text-muted" th:if="${m.activo}">Activa</small>
+                                                    <small class="text-danger" th:unless="${m.activo}">Inactiva</small>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    </div>
+
+                                                    <footer th:replace="general/fragmentos :: footer"></footer>
+                                                </body>
 </html>
