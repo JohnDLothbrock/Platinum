@@ -190,9 +190,9 @@ INSERT INTO servicio (nombre, descripcion, tipo_vehiculo, paquete, duracion_minu
 INSERT IGNORE INTO promocion 
 (titulo, descripcion, porcentaje_descuento, fecha_inicio, fecha_fin, imagen, activa) 
 VALUES
-('Promo Fin de Semana', '10% de descuento en servicios Premium', 10.00, '2025-12-16', '2026-01-15', 
+('Promo Fin de Semana', '10% de descuento en servicios Premium', 10, '2025-12-16', '2026-01-15', 
  'https://lirp.cdn-website.com/443aa17f/dms3rep/multi/opt/car+detailing+the+works+auto+center-1920w.jpg', 1),
-('15% Detallado Interior', '15% de descuento en limpieza profunda de cabina para cualquier vehículo', 15.00, '2025-12-16', '2026-01-31', 
+('15% Detallado Interior', '15% de descuento en limpieza profunda de cabina para cualquier vehículo', 15, '2025-12-16', '2026-01-31', 
  'https://cavallistables.com/wp-content/uploads/2020/09/professional-car-detailing-1200x675.jpg.webp', 1),
-('5% Lavado + Pulido', 'Combina lavado exterior con pulido ligero y ahorra 5%', 5.00, '2025-12-16', '2026-02-28', 
+('5% Lavado + Pulido', 'Combina lavado exterior con pulido ligero y ahorra 5%', 5, '2025-12-16', '2026-02-28', 
  'https://sergioescobar.cl/wp-content/uploads/2020/12/Deja-tu-auto-como-nuevo.jpg', 1);
