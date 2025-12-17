@@ -169,18 +169,30 @@ CREATE TABLE usuario (
 
 -- 5.3 USUARIO_ROL
 CREATE TABLE usuario_rol (
-  id_usuario INT NOT NULL,
-  id_rol INT NOT NULL,
-  PRIMARY KEY (id_usuario, id_rol),
-  CONSTRAINT fk_usuario_rol_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_usuario_rol_rol FOREIGN KEY (id_rol) REFERENCES rol(id_rol) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+    id_usuario INT NOT NULL,
+    id_rol INT NOT NULL,
+    PRIMARY KEY (id_usuario , id_rol),
+    CONSTRAINT fk_usuario_rol_usuario FOREIGN KEY (id_usuario)
+        REFERENCES usuario (id_usuario)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_usuario_rol_rol FOREIGN KEY (id_rol)
+        REFERENCES rol (id_rol)
+        ON DELETE CASCADE ON UPDATE CASCADE
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8MB4 COLLATE = UTF8MB4_UNICODE_CI;
 
 -- 6. DATOS DE EJEMPLO
 INSERT INTO servicio (nombre, descripcion, tipo_vehiculo, paquete, duracion_minutos, precio, activo) VALUES
 ('Lavado Básico', 'Lavado exterior rápido', 'Sedan', 'Basico', 30, 8000.00, 1),
 ('Detallado Interior', 'Limpieza profunda de cabina', 'SUV', 'Premium', 90, 25000.00, 1),
-('Cerámica Premium', 'Aplicación de recubrimiento cerámico', 'Pickup', 'VIP', 240, 80000.00, 1);
+('Cerámica Premium', 'Aplicación de recubrimiento cerámico', 'Pickup', 'VIP', 240, 60000.00, 1);
 
-INSERT INTO promocion (titulo, descripcion, porcentaje_descuento, fecha_inicio, fecha_fin, activa) VALUES
-('Promo Fin de Semana', '10% de descuento en servicios Premium', 10.00, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 30 DAY), 1);
+-- 7 DATOS DE EJEMPLO PARA PROMOCIONES
+INSERT IGNORE INTO promocion 
+(titulo, descripcion, porcentaje_descuento, fecha_inicio, fecha_fin, imagen, activa) 
+VALUES
+('Promo Fin de Semana', '10% de descuento en servicios Premium', 10.00, '2025-12-16', '2026-01-15', 
+ 'https://lirp.cdn-website.com/443aa17f/dms3rep/multi/opt/car+detailing+the+works+auto+center-1920w.jpg', 1),
+('15% Detallado Interior', '15% de descuento en limpieza profunda de cabina para cualquier vehículo', 15.00, '2025-12-16', '2026-01-31', 
+ 'https://cavallistables.com/wp-content/uploads/2020/09/professional-car-detailing-1200x675.jpg.webp', 1),
+('5% Lavado + Pulido', 'Combina lavado exterior con pulido ligero y ahorra 5%', 5.00, '2025-12-16', '2026-02-28', 
+ 'https://sergioescobar.cl/wp-content/uploads/2020/12/Deja-tu-auto-como-nuevo.jpg', 1);
