@@ -2,8 +2,8 @@ package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data
@@ -18,31 +18,30 @@ public class Promocion implements Serializable {
     @Column(name = "id_promocion")
     private Integer idPromocion;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "titulo", nullable = false, length = 80)
     private String titulo;
 
-    @Column(nullable = false, length = 255)
+    @Column(name = "descripcion", length = 500)
     private String descripcion;
 
-    @Column(name = "porcentaje_descuento", precision = 5, scale = 2)
-    private BigDecimal porcentajeDescuento;
+    @Column(name = "porcentaje_descuento", nullable = false)
+    private Integer porcentajeDescuento = 0;
 
-    @Column(name = "fecha_inicio", nullable = false)
-    private Date fechaInicio;
+    @Column(name = "fecha_inicio")
+    private LocalDate fechaInicio;
 
-    @Column(name = "fecha_fin", nullable = false)
-    private Date fechaFin;
+    @Column(name = "fecha_fin")
+    private LocalDate fechaFin;
 
-    @Column(length = 1024)
-    private String imagen;
+    @Column(name = "imagen", length = 255)
+    private String imagen; // ruta o URL
 
-    @Column(nullable = false)
+    @Column(name = "activa", nullable = false)
     private Boolean activa = true;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaCreacion;
+    private Timestamp fechaCreacion;
 
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaModificacion;
+    private Timestamp fechaModificacion;
 }
-

@@ -4,12 +4,14 @@
  */
 package com.platinum.controller;
 
-import org.springframework.ui.Model;
+import com.platinum.domain.Usuario;
+import com.platinum.repository.RolRepository;
 import com.platinum.service.UsuarioService;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/usuario")
@@ -18,13 +20,55 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listado")
-    public String inicio(Model model) {
-        var usuarios = usuarioService.getUsuarios(false);
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("totalUsuarios", usuarios.size());
+    @Autowired
+    private RolRepository rolRepository;
 
-        // ✅ Cambiado: ahora devuelve "usuario" (no "usuario/listado")
-        return "usuario";
+    // lisatdo
+    @GetMapping("/listado")
+    public String listado(Model model) {
+        model.addAttribute("usuarios", usuarioService.getUsuarios());
+        return "usuario/listado";
+    }
+
+    // nuevo
+    @GetMapping("/nuevo")
+    public String nuevo(Usuario usuario, Model model) {
+        model.addAttribute("roles", rolRepository.findAll());
+        return "usuario/modifica";
+    }
+
+    // editar
+    @GetMapping("/editar/{idUsuario}")
+    public String editar(Usuario usuario, Model model) {
+        usuario = usuarioService.getUsuario(usuario);
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("roles", rolRepository.findAll());
+        return "usuario/modifica";
+    }
+
+    // guardar
+    @PostMapping("/guardar")
+    public String guardar(
+            Usuario usuario,
+            @RequestParam(name = "rolesSeleccionados", required = false) Integer[] rolesIds,
+            @RequestParam(name = "nuevaClave", defaultValue = "false") boolean nuevaClave
+    ) {
+        var roles = new HashSet<Integer>();
+        if (rolesIds != null) {
+            for (Integer id : rolesIds) {
+                roles.add(id);
+            }
+        }
+        usuarioService.save(usuario, roles, nuevaClave);
+        return "redirect:/usuario/listado";
+    }
+
+
+    // activar / desactivar
+    @GetMapping("/activar/{idUsuario}")
+    public String activar(Usuario usuario) {
+        usuarioService.activarDesactivar(usuario);
+        return "redirect:/usuario/listado";
     }
 }
+

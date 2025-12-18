@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4" style="max-width: 900px;">
+            <h2>Promoción</h2>
+
+            <form th:action="@{/promocion/guardar}" method="post" th:object="${promocion}">
+                <input type="hidden" th:field="*{idPromocion}"/>
+
+                <div class="mb-3">
+                    <label class="form-label">Título</label>
+                    <input class="form-control" th:field="*{titulo}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <textarea class="form-control" th:field="*{descripcion}" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Porcentaje descuento (%)</label>
+                    <input type="number" class="form-control" th:field="*{porcentajeDescuento}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha inicio</label>
+                    <input type="date" class="form-control" th:field="*{fechaInicio}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha fin</label>
+                    <input type="date" class="form-control" th:field="*{fechaFin}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Imagen (URL o ruta)</label>
+                    <input class="form-control" th:field="*{imagen}"/>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" th:field="*{activa}"/>
+                    <label class="form-check-label">Activa</label>
+                </div>
+
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/promocion/listado}">Cancelar</a>
+            </form>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

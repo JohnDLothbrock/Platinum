@@ -5,12 +5,10 @@
 package com.platinum.repository;
 
 import com.platinum.domain.Usuario;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author anjuy
- */
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-
+    Optional<Usuario> findByUsername(String username);
 }
+

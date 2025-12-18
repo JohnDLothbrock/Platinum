@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Promociones</h2>
+
+            <div class="row">
+                <div class="col-md-4 mb-3" th:each="p : ${promociones}">
+                    <div class="card h-100">
+                        <img th:if="${p.imagen != null and !#strings.isEmpty(p.imagen)}"
+                             th:src="${p.imagen}"
+                             class="card-img-top"
+                             alt="promo"/>
+
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${p.titulo}"></h5>
+                            <p class="card-text" th:text="${p.descripcion}"></p>
+                            <p><b>Descuento:</b> <span th:text="${p.porcentajeDescuento}"></span>%</p>
+                            <p><b>Vigencia:</b> <span th:text="${p.fechaInicio}"></span> - <span th:text="${p.fechaFin}"></span></p>
+
+                            <span class="badge bg-success" th:if="${p.activa}">Activa</span>
+                            <span class="badge bg-secondary" th:if="${!p.activa}">Inactiva</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

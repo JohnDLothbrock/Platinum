@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Membresías</h2>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Tipo</th>
+                        <th>Precio</th>
+                        <th>Vigencia</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="m : ${membresias}" th:if="${m.activo}">
+                        <td th:text="${m.nombreCliente}"></td>
+                        <td th:text="${m.tipo}"></td>
+                        <td>₡<span th:text="${m.precio}"></span></td>
+                        <td>
+                            <span th:text="${m.fechaInicio}"></span>
+                            -
+                            <span th:text="${m.fechaFin}"></span>
+                        </td>
+                        <td th:text="${m.estado}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

@@ -20,9 +20,9 @@ public class Rol implements Serializable {
     @Column(name = "id_rol")
     private Integer idRol;
 
-    @Column(unique = true, length = 20)
-    private String rol;
+    @Column(name = "nombre", nullable = false, unique = true, length = 20)
+    private String nombre;  // ADMIN / CLIENTE
 
-    @Column(name = "fecha_creacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaCreacion;
+    @Column(name = "descripcion")
+    private String descripcion;
 }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4" style="max-width: 800px;">
+            <h2>Editar cita</h2>
+
+            <form th:action="@{/cita/actualizar}" method="post" th:object="${cita}">
+                <input type="hidden" th:field="*{idCita}"/>
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre del cliente</label>
+                    <input class="form-control" th:field="*{nombreCliente}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Teléfono</label>
+                    <input class="form-control" th:field="*{telefono}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo</label>
+                    <input type="email" class="form-control" th:field="*{correo}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tipo de vehículo</label>
+                    <input class="form-control" th:field="*{tipoVehiculo}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Placa</label>
+                    <input class="form-control" th:field="*{placa}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Servicio solicitado</label>
+                    <input class="form-control" th:field="*{servicioSolicitado}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha de la cita</label>
+                    <input type="date" class="form-control" th:field="*{fechaCita}" required/>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Hora</label>
+                    <input type="time" class="form-control" th:field="*{horaCita}"/>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select" th:field="*{estado}">
+                        <option value="PENDIENTE">PENDIENTE</option>
+                        <option value="CONFIRMADA">CONFIRMADA</option>
+                        <option value="CANCELADA">CANCELADA</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Notas</label>
+                    <textarea class="form-control" th:field="*{notas}" rows="3"></textarea>
+                </div>
+
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/cita/listado}">Cancelar</a>
+            </form>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

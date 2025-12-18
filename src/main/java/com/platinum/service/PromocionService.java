@@ -1,4 +1,3 @@
-
 package com.platinum.service;
 
 import com.platinum.domain.Promocion;
@@ -15,26 +14,28 @@ public class PromocionService {
     private PromocionRepository promocionRepository;
 
     @Transactional(readOnly = true)
-    public List<Promocion> getPromociones(boolean soloActivas) {
-        var lista = promocionRepository.findAll();
-        if (soloActivas) {
-            lista.removeIf(p -> !Boolean.TRUE.equals(p.getActiva()));
-        }
-        return lista;
+    public List<Promocion> getPromociones() {
+        return promocionRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public Promocion getPromocion(Promocion promocion) {
-        return promocionRepository.findById(promocion.getIdPromocion()).orElse(null);
+    public Promocion getPromocion(Promocion p) {
+        return promocionRepository.findById(p.getIdPromocion()).orElse(null);
     }
 
     @Transactional
-    public void save(Promocion promocion) {
-        promocionRepository.save(promocion);
+    public void save(Promocion p) {
+        if (p.getActiva() == null) p.setActiva(true);
+        if (p.getPorcentajeDescuento() == null) p.setPorcentajeDescuento(0);
+        promocionRepository.save(p);
     }
 
     @Transactional
-    public void delete(Promocion promocion) {
-        promocionRepository.delete(promocion);
+    public void activarDesactivar(Promocion p) {
+        var obj = getPromocion(p);
+        if (obj != null) {
+            obj.setActiva(!obj.getActiva());
+            promocionRepository.save(obj);
+        }
     }
 }

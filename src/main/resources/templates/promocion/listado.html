@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Administración - Promociones</h2>
+
+            <a class="btn btn-primary mb-3" th:href="@{/promocion/nuevo}">Nueva promoción</a>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Descuento</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Activa</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="p : ${promociones}">
+                        <td th:text="${p.titulo}"></td>
+                        <td th:text="${p.porcentajeDescuento} + '%'"></td>
+                        <td th:text="${p.fechaInicio}"></td>
+                        <td th:text="${p.fechaFin}"></td>
+                        <td th:text="${p.activa} ? 'Sí' : 'No'"></td>
+                        <td>
+                            <a class="btn btn-sm btn-warning"
+                               th:href="@{/promocion/editar/{id}(id=${p.idPromocion})}">Editar</a>
+                            <a class="btn btn-sm btn-secondary"
+                               th:href="@{/promocion/activar/{id}(id=${p.idPromocion})}">Activar/Desactivar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

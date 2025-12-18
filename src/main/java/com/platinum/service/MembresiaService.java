@@ -19,17 +19,23 @@ public class MembresiaService {
     }
 
     @Transactional(readOnly = true)
-    public Membresia getMembresia(Membresia membresia) {
-        return membresiaRepository.findById(membresia.getIdMembresia()).orElse(null);
+    public Membresia getMembresia(Membresia m) {
+        return membresiaRepository.findById(m.getIdMembresia()).orElse(null);
     }
 
     @Transactional
-    public void save(Membresia membresia) {
-        membresiaRepository.save(membresia);
+    public void save(Membresia m) {
+        if (m.getActivo() == null) m.setActivo(true);
+        if (m.getEstado() == null || m.getEstado().isBlank()) m.setEstado("ACTIVA");
+        membresiaRepository.save(m);
     }
 
     @Transactional
-    public void delete(Membresia membresia) {
-        membresiaRepository.delete(membresia);
+    public void activarDesactivar(Membresia m) {
+        var obj = getMembresia(m);
+        if (obj != null) {
+            obj.setActivo(!obj.getActivo());
+            membresiaRepository.save(obj);
+        }
     }
 }

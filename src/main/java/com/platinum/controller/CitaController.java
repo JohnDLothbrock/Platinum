@@ -1,4 +1,5 @@
 
+
 package com.platinum.controller;
 
 import com.platinum.domain.Cita;
@@ -7,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -28,8 +28,9 @@ public class CitaController {
 
     @PostMapping("/guardar")
     public String guardar(Cita cita) {
+        cita.setEstado("PENDIENTE");
         citaService.save(cita);
-        return "redirect:/cita/listado";
+        return "redirect:/agendar_cita?ok";
     }
 
     @GetMapping("/eliminar/{idCita}")
@@ -38,10 +39,16 @@ public class CitaController {
         return "redirect:/cita/listado";
     }
 
-    @GetMapping("/modificar/{idCita}")
-    public String modificar(Cita cita, Model model) {
+    @GetMapping("/editar/{idCita}")
+    public String editar(Cita cita, Model model) {
         cita = citaService.getCita(cita);
         model.addAttribute("cita", cita);
         return "cita/modifica";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizar(Cita cita) {
+        citaService.save(cita);
+        return "redirect:/cita/listado";
     }
 }

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4" style="max-width: 900px;">
+            <h2>Membresía</h2>
+
+            <form th:action="@{/membresia/guardar}" method="post" th:object="${membresia}">
+                <input type="hidden" th:field="*{idMembresia}"/>
+
+                <div class="mb-3">
+                    <label class="form-label">Nombre del cliente</label>
+                    <input class="form-control" th:field="*{nombreCliente}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Correo</label>
+                    <input type="email" class="form-control" th:field="*{correo}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Tipo</label>
+                    <input class="form-control" th:field="*{tipo}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Precio</label>
+                    <input type="number" step="0.01" class="form-control" th:field="*{precio}" required/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha inicio</label>
+                    <input type="date" class="form-control" th:field="*{fechaInicio}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Fecha fin</label>
+                    <input type="date" class="form-control" th:field="*{fechaFin}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Estado</label>
+                    <select class="form-select" th:field="*{estado}">
+                        <option value="ACTIVA">ACTIVA</option>
+                        <option value="VENCIDA">VENCIDA</option>
+                        <option value="CANCELADA">CANCELADA</option>
+                    </select>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" th:field="*{activo}"/>
+                    <label class="form-check-label">Activo</label>
+                </div>
+
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/membresia/listado}">Cancelar</a>
+            </form>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

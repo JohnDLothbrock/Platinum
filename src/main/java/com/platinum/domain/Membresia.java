@@ -3,7 +3,8 @@ package com.platinum.domain;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import lombok.Data;
 
 @Data
@@ -21,40 +22,30 @@ public class Membresia implements Serializable {
     @Column(name = "nombre_cliente", nullable = false, length = 100)
     private String nombreCliente;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "correo", nullable = false, length = 100)
     private String correo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private Tipo tipo;
+    @Column(name = "tipo", nullable = false, length = 50)
+    private String tipo;
 
-    @Column(name = "fecha_inicio", nullable = false)
-    private Date fechaInicio;
+    @Column(name = "fecha_inicio")
+    private LocalDate fechaInicio;
 
-    @Column(name = "fecha_fin", nullable = false)
-    private Date fechaFin;
+    @Column(name = "fecha_fin")
+    private LocalDate fechaFin;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private Estado estado = Estado.Activa;
+    @Column(name = "estado", nullable = false, length = 20)
+    private String estado = "ACTIVA";
 
-    @Column(nullable = false, precision = 10, scale = 2)
+    @Column(name = "precio", nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
-    @Column(nullable = false)
+    @Column(name = "activo", nullable = false)
     private Boolean activo = true;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaCreacion;
+    private Timestamp fechaCreacion;
 
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaModificacion;
-
-    public enum Tipo {
-        Mensual, Anual
-    }
-
-    public enum Estado {
-        Activa, Vencida, Cancelada
-    }
+    private Timestamp fechaModificacion;
 }

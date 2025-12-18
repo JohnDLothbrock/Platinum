@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="general/fragmentos :: head"></head>
+    <body>
+        <header th:replace="general/fragmentos :: header"></header>
+
+        <div class="container mt-4">
+            <h2>Usuarios</h2>
+
+            <a th:href="@{/usuario/nuevo}" class="btn btn-primary mb-3">Nuevo Usuario</a>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Nombre</th>
+                        <th>Roles</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="u : ${usuarios}">
+                        <td th:text="${u.username}"></td>
+                        <td th:text="${u.nombre}"></td>
+                        <td>
+                            <span th:each="r : ${u.roles}"
+                                  th:text="${r.nombre} + ' '"></span>
+                        </td>
+                        <td th:text="${u.activo} ? 'Sí' : 'No'"></td>
+                        <td>
+                            <a th:href="@{/usuario/editar/{id}(id=${u.idUsuario})}"
+                               class="btn btn-sm btn-warning">Editar</a>
+                            <a th:href="@{/usuario/activar/{id}(id=${u.idUsuario})}"
+                               class="btn btn-sm btn-secondary">Activar/Desactivar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer th:replace="general/fragmentos :: footer"></footer>
+    </body>
+</html>
+

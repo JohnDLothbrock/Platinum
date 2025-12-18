@@ -4,18 +4,12 @@
  */
 package com.platinum.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Data;
 
-/**
- * @author anjuy
- */
 @Data
 @Entity
 @Table(name = "usuario")
@@ -26,38 +20,29 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-
     private Integer idUsuario;
 
-    @Column(unique = true, nullable = false, length = 30)
-    private String username;
-    
-     @Column(nullable = false, length = 512)
-    private String password;
-
-    @Column(nullable = false, length = 50)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
-    @Column(length = 50)
-    private String apellidos;
+    @Column(name = "username", nullable = false, unique = true, length = 50)
+    private String username;
 
-    @Column(length = 75, unique = true)
-    private String correo;
+    @Column(name = "password", nullable = false, length = 255)
+    private String password;
 
-    @Column(length = 25)
-    private String telefono;
-
-    @Column(name = "ruta_imagen", length = 1024)
-    private String rutaImagen;
-
-    @Column(nullable = false)
+    @Column(name = "activo", nullable = false)
     private Boolean activo = true;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private java.sql.Timestamp fechaCreacion;
 
-    @Column(name = "fecha_modificacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaModificacion;
-
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "usuario_rol",
+        joinColumns = @JoinColumn(name = "id_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "id_rol")
+    )
+    private Set<Rol> roles = new HashSet<>();
 }
+

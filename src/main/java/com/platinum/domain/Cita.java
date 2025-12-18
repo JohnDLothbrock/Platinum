@@ -2,8 +2,9 @@ package com.platinum.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import lombok.Data;
 
 @Data
@@ -21,42 +22,36 @@ public class Cita implements Serializable {
     @Column(name = "nombre_cliente", nullable = false, length = 100)
     private String nombreCliente;
 
-    @Column(nullable = false, length = 20)
+    @Column(name = "telefono", nullable = false, length = 25)
     private String telefono;
 
-    @Column(length = 100)
+    @Column(name = "correo", length = 100)
     private String correo;
 
-    @Column(name = "tipo_vehiculo", nullable = false, length = 30)
+    @Column(name = "tipo_vehiculo", length = 50)
     private String tipoVehiculo;
 
-    @Column(length = 10)
+    @Column(name = "placa", length = 20)
     private String placa;
 
-    @Column(name = "servicio_solicitado", nullable = false, length = 100)
+    @Column(name = "servicio_solicitado", length = 100)
     private String servicioSolicitado;
 
     @Column(name = "fecha_cita", nullable = false)
-    private Date fechaCita;
+    private LocalDate fechaCita;
 
-    @Column(name = "hora_cita", nullable = false)
-    private Time horaCita;
+    @Column(name = "hora_cita")
+    private LocalTime horaCita;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 15)
-    private Estado estado = Estado.Pendiente;
+    @Column(name = "estado", nullable = false, length = 20)
+    private String estado = "PENDIENTE";
 
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "notas", length = 500)
     private String notas;
 
     @Column(name = "fecha_creacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaCreacion;
+    private Timestamp fechaCreacion;
 
     @Column(name = "fecha_modificacion", insertable = false, updatable = false)
-    private java.sql.Timestamp fechaModificacion;
-
-    public enum Estado {
-        Pendiente, Confirmada, Rechazada, Cancelada, Completada
-    }
+    private Timestamp fechaModificacion;
 }
-

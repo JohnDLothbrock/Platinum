@@ -34,11 +34,36 @@
                             <li class="nav-item"><a class="nav-link" th:href="@{/promociones}">Promociones</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/contacto}">Contacto</a></li>
 
-                            <!-- Solo cuando tengamos login -->
-                            <!-- <li class="nav-item"><a class="nav-link" th:href="@{/usuario/listado}">Administración</a></li> -->
+                            <!-- Esto lo agrego solo para admin -->
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" th:href="@{/usuario/listado}">Administración</a>
+                            </li>
+                            
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" th:href="@{/cita/listado}">Citas</a>
+                            </li>
+                            
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" th:href="@{/membresia/listado}">Admin Membresías</a>
+                            </li>
+
+                            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                                <a class="nav-link" th:href="@{/promocion/listado}">Admin Promociones</a>
+                            </li>
+
 
                         </ul>
+
+                   
+                        <div class="d-flex" sec:authorize="isAuthenticated()">
+                            <form th:action="@{/logout}" method="post">
+                                <button type="submit" class="btn btn-outline-light btn-sm">
+                                    Cerrar sesión
+                                </button>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
             </nav>
         </header>
