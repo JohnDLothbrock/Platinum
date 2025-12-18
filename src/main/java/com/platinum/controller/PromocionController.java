@@ -12,12 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@RequestMapping("/")
 public class PromocionController {
 
     @Autowired
     private PromocionService promocionService;
 
-    // PÚBLICO (tu menú apunta a /promociones)
     @GetMapping("/promociones")
     public String publico(Model model) {
         model.addAttribute("promociones", promocionService.getPromociones());

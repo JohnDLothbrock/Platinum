@@ -1,39 +1,67 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
     <head th:replace="general/fragmentos :: head"></head>
-
-    <body>
+    <body style="background: url('https://png.pngtree.com/thumb_back/fh260/background/20231227/pngtree-high-resolution-background-featuring-silver-metal-brushed-aluminum-texture-for-design-image_13850077.png') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
         <header th:replace="general/fragmentos :: header"></header>
-
-        <div class="container mt-5">
-            <h2 class="text-center mb-4">Promociones Activas</h2>
-            <p class="text-center text-muted mb-5">
+        <div class="container mt-5 py-5">
+            <h2 class="text-center mb-4 text-dark fw-bold display-5">Promociones Activas</h2>
+            <p class="text-center text-dark mb-5 lead fw-bold">  <!-- ← Cambiado a text-dark y negrita para máxima visibilidad -->
                 Aprovecha nuestras ofertas limitadas y mantén tu auto impecable.
             </p>
 
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div th:if="${promociones.isEmpty()}" class="alert alert-secondary text-center py-5 border-0 shadow-sm">
+                <h4 class="text-muted">No hay promociones activas en este momento.</h4>
+                <p class="text-muted">¡Vuelve pronto para ver nuevas ofertas!</p>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-5" th:unless="${promociones.isEmpty()}">
                 <div class="col" th:each="promo : ${promociones}">
-                    <div class="card h-100 shadow-sm">
-                        <img th:src="@{${promo.imagen}}" class="card-img-top" alt="Imagen promoción">
-                            <div class="card-body text-center">
-                                <h5 th:text="${promo.titulo}">Título de la promoción</h5>
-                                <p class="text-muted" th:text="${promo.descripcion}">Descripción corta...</p>
-                                <p class="fw-bold text-success">Descuento: <span th:text="${promo.descuentoPorcentaje}">%</span></p>
-                                <small class="text-muted">
-                                    Vigencia: <span th:text="${promo.fechaInicio}"></span> - <span th:text="${promo.fechaFin}"></span>
+                    <div class="card h-100 border-0 shadow-lg bg-white overflow-hidden hover-lift">
+                        <img th:if="${promo.imagen != null and !promo.imagen.isEmpty()}"
+                             th:src="@{${promo.imagen}}"
+                             class="card-img-top"
+                             style="height: 280px; object-fit: cover;"
+                             alt="Promoción">
+                            <div th:if="${promo.imagen == null or promo.imagen.isEmpty()}"
+                                 class="bg-dark text-white d-flex align-items-center justify-content-center"
+                                 style="height: 280px;">
+                                <h3 class="text-warning">Platinum Detail</h3>
+                            </div>
+                            <div class="card-body text-center d-flex flex-column p-4">
+                                <h4 class="card-title text-dark fw-bold" th:text="${promo.titulo}">Título</h4>
+                                <p class="card-text text-dark flex-grow-1 mt-3">  <!-- ← Cambiado de text-muted a text-dark -->
+                                    <span th:text="${promo.descripcion}">Descripción...</span>
+                                </p>
+                                <div class="mt-4" th:if="${promo.porcentajeDescuento != null}">
+                                    <span class="badge rounded-pill px-5 py-3" style="background-color: #FFD700; color: #212529; font-size: 1.4rem;">
+                                        <i class="fas fa-tag me-2"></i>
+                                        <strong th:text="${promo.porcentajeDescuento} + '%'">%</strong> OFF
+                                    </span>
+                                </div>
+                                <small class="text-dark mt-4 fw-bold">  <!-- ← Cambiado a text-dark y negrita -->
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    Vigente del
+                                    <strong th:text="${#dates.format(promo.fechaInicio, 'dd/MM/yyyy')}"></strong>
+                                    al
+                                    <strong th:text="${#dates.format(promo.fechaFin, 'dd/MM/yyyy')}"></strong>
                                 </small>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <footer th:replace="general/fragmentos :: footer"></footer>
+
+        <!-- Estilo extra para efecto hover -->
+        <style>
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.2) !important;
+            }
+        </style>
     </body>
 </html>

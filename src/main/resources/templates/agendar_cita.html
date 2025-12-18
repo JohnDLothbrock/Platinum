@@ -1,73 +1,98 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-
     <head th:replace="general/fragmentos :: head"></head>
-
-    <body>
+    <body style="background: url('https://png.pngtree.com/thumb_back/fh260/background/20231227/pngtree-high-resolution-background-featuring-silver-metal-brushed-aluminum-texture-for-design-image_13850077.png') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
         <header th:replace="general/fragmentos :: header"></header>
-
         <div class="container mt-5">
-            <h1 class="text-center mb-4">Agendar una Cita</h1>
-            <p class="text-center">
+            <h1 class="text-center mb-4 text-dark">Agendar una Cita</h1>
+            <p class="text-center text-muted mb-5">
                 Complete el siguiente formulario para agendar su cita de detailing.
             </p>
-
-            <form th:action="@{/cita/guardar}" method="post" th:object="${cita}">
-
-                <div class="mb-3">
-                    <label>Nombre completo</label>
-                    <input class="form-control" th:field="*{nombreCliente}" required/>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-xl-6">
+                    <div class="card shadow-sm p-4 bg-light"> 
+                        <form class="mt-2"
+                              th:action="@{/cita/guardar}"
+                              th:object="${cita}"
+                              method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Nombre completo</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{nombreCliente}"
+                                       placeholder="Ingrese su nombre completo"
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teléfono</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{telefono}"
+                                       placeholder="Número de contacto"
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Correo electrónico</label>
+                                <input type="email"
+                                       class="form-control"
+                                       th:field="*{correo}"
+                                       placeholder="ejemplo@correo.com"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tipo de vehículo</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{tipoVehiculo}"
+                                       placeholder="Sedan, SUV, Pickup, Motocicleta..."
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Placa del vehículo</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{placa}"
+                                       placeholder="Número de placa"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Servicio deseado</label>
+                                <input type="text"
+                                       class="form-control"
+                                       th:field="*{servicioSolicitado}"
+                                       placeholder="Ejemplo: Lavado Premium, Detallado Interior..."
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fecha deseada</label>
+                                <input type="date"
+                                       class="form-control"
+                                       th:field="*{fechaCita}"
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Hora deseada</label>
+                                <input type="time"
+                                       class="form-control"
+                                       th:field="*{horaCita}"
+                                       required="required"/>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Notas adicionales</label>
+                                <textarea class="form-control"
+                                          th:field="*{notas}"
+                                          rows="3"
+                                          placeholder="Detalles especiales del vehículo o preferencias del servicio"></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-dark btn-lg">
+                                    Enviar Solicitud
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <label>Teléfono</label>
-                    <input class="form-control" th:field="*{telefono}" required/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Correo</label>
-                    <input type="email" class="form-control" th:field="*{correo}"/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Tipo de vehículo</label>
-                    <input class="form-control" th:field="*{tipoVehiculo}"/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Placa</label>
-                    <input class="form-control" th:field="*{placa}"/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Servicio solicitado</label>
-                    <input class="form-control" th:field="*{servicioSolicitado}"/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Fecha de la cita</label>
-                    <input type="date" class="form-control" th:field="*{fechaCita}" required/>
-                </div>
-
-                <div class="mb-3">
-                    <label>Notas</label>
-                    <textarea class="form-control" th:field="*{notas}"></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-dark w-100">
-                    Enviar Solicitud
-                </button>
-            </form>
-
+            </div>
         </div>
-
         <footer th:replace="general/fragmentos :: footer"></footer>
     </body>
 </html>
-
