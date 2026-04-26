@@ -4,19 +4,8 @@
  */
 package com.platinum.service;
 
-import com.google.auth.Credentials;
-import com.google.auth.ServiceAccountSigner;
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.*;
-import com.google.cloud.storage.Storage.SignUrlOption;
+/*
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.concurrent.TimeUnit;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FirebaseStorageService {
@@ -87,3 +76,4 @@ public class FirebaseStorageService {
     }
 
 }
+*/
